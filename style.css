@@ -1,0 +1,15 @@
+body {
+  background-color: #454c4c;
+  overflow: hidden;
+}
+
+canvas {
+  background-color: white;
+  display: block;
+  margin: 50px auto 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 0 #222;
+  cursor: pointer;
+  width: 500px;
+  height: 250px;
+}
