@@ -19,6 +19,10 @@ canvas.addEventListener(
     // alert("pozycja myszki X " + mousePos.x + ", Pozycja myszki Y" + mousePos.y);
     document.getElementById("X").innerHTML = mousePos.x;
     document.getElementById("Y").innerHTML = mousePos.y;
+    ctx.fillStyle = "#ff2626";
+    ctx.beginPath();
+    ctx.arc(mousePos.x, mousePos.y, 2, 0, Math.PI * 2, true);
+    ctx.fill();
   },
   false
 );
@@ -26,9 +30,11 @@ canvas.addEventListener(
 //Get Mouse Position
 function getMousePos(canvas, evt) {
   var rect = canvas.getBoundingClientRect();
+  var scaleX = canvas.width / rect.width;
+  var scaleY = canvas.height / rect.height;
   return {
-    x: evt.clientX - rect.left,
-    y: evt.clientY - rect.top
+    x: (evt.clientX - rect.left) * scaleX,
+    y: (evt.clientY - rect.top) * scaleY
   };
 }
 
@@ -46,14 +52,14 @@ function drawFigure(x) {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#FF0000";
+
     ctx.strokeRect(100, 30, 80, 80);
   }
   if (x == "prostokąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#FF0000";
+
     ctx.strokeRect(100, 50, 150, 75);
   }
   if (x == "trujkąt") {
@@ -67,8 +73,8 @@ function drawFigure(x) {
     ctx.closePath();
 
     // the outline
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#666666";
+    ctx.lineWidth = 1;
+
     ctx.stroke();
   }
 }
