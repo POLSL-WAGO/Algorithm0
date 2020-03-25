@@ -1,12 +1,38 @@
-const selectElement = document.querySelector(".custom-select");
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
 
+const selectElement = document.querySelector(".custom-select");
 selectElement.addEventListener("change", event => {
   const result = document.querySelector(".result");
   result.textContent = `${event.target.value}`;
-  console.log(result.textContent);
+  //console.log(result.textContent);
   drawFigure(result.textContent);
 });
 
+ctx.fillRect(0, 0, canvas.getAttribute("height"), canvas.getAttribute("width"));
+
+//report the mouse position on click
+canvas.addEventListener(
+  "click",
+  function(evt) {
+    var mousePos = getMousePos(canvas, evt);
+    // alert("pozycja myszki X " + mousePos.x + ", Pozycja myszki Y" + mousePos.y);
+    document.getElementById("X").innerHTML = mousePos.x;
+    document.getElementById("Y").innerHTML = mousePos.y;
+  },
+  false
+);
+
+//Get Mouse Position
+function getMousePos(canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top
+  };
+}
+
+// figure options
 function drawFigure(x) {
   if (x == "koło") {
     var canvas = document.getElementById("myCanvas");
