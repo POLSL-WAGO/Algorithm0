@@ -3,6 +3,6 @@
 Projekt relizowany na prezdmiot Wybrane Algorytmy Geometrii Obliczeniowej
 
 użyte technologie:
-- JawoSkrrrt
-- kanwas
-- ha te em el
+- JavaSpript
+- CANVAS
+- HTML
