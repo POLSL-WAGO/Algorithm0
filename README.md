@@ -6,3 +6,4 @@ użyte technologie:
 - JavaSpript
 - CANVAS
 - HTML
+- CSS
