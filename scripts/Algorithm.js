@@ -1,3 +1,9 @@
+/*
+	Kuśmierz Wojciech
+	Rojek Marcin
+	Wiśniewski Mateusz
+*/
+
 function createImageOnCanvas(imageId) {
   document.getElementById("imgCanvas").style.display = "block";
   document.getElementById("images").style.overflowY = "hidden";
