@@ -8,7 +8,7 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 const selectElement = document.querySelector(".custom-select");
-selectElement.addEventListener("change", event => {
+selectElement.addEventListener("change", (event) => {
   const result = document.querySelector(".result");
   result.textContent = `${event.target.value}`;
   //console.log(result.textContent);
@@ -23,7 +23,7 @@ const checkFigure = document.querySelector(".result");
 canvas.addEventListener(
   //console.log(result.textContent);
   "click",
-  function(evt) {
+  function (evt) {
     var mousePos = getMousePos(canvas, evt);
     // alert("pozycja myszki X " + mousePos.x + ", Pozycja myszki Y" + mousePos.y);
     document.getElementById("X").innerHTML = mousePos.x;
@@ -33,7 +33,7 @@ canvas.addEventListener(
     ctx.arc(mousePos.x, mousePos.y, 2, 0, Math.PI * 2, true);
     ctx.fill();
 
-    if(checkFigure.textContent == "kwadrat"){
+    if (checkFigure.textContent == "kwadrat") {
       if (r.contains(mousePos.x, mousePos.y)) {
         //alert("punkt");
         document.getElementById("result").innerHTML = inside;
@@ -41,7 +41,7 @@ canvas.addEventListener(
         document.getElementById("result").innerHTML = outside;
       }
     }
-    if(checkFigure.textContent == "prostokąt"){
+    if (checkFigure.textContent == "prostokąt") {
       r = new MyRect(100, 50, 150, 75);
       if (r.contains(mousePos.x, mousePos.y)) {
         //alert("punkt");
@@ -50,16 +50,18 @@ canvas.addEventListener(
         document.getElementById("result").innerHTML = outside;
       }
     }
-    if(checkFigure.textContent == "trójkąt"){
+    if (checkFigure.textContent == "trójkąt") {
+      // todo dać sprawdzanie dla trójkąta
       console.log("trójkąt");
     }
-    if(checkFigure.textContent == "koło"){
-      console.log(mousePos.x)
-      console.log(mousePos.y)
-      var check = (mousePos.x - 150)^2 + (mousePos.y - 75)^2;
-      console.log(check)
-      if(check <= 50 && check >= -50){
-        //alert("punkt");
+    if (checkFigure.textContent == "koło") {
+      console.log(mousePos.x);
+      console.log(mousePos.y);
+
+      var check = (mousePos.x - 150) * (mousePos.x - 150) + (mousePos.y - 75) * (mousePos.y - 75);
+      console.log("check pozycja" + check);
+      const r = 50 * 50;
+      if (check < r) {
         document.getElementById("result").innerHTML = inside;
       } else {
         document.getElementById("result").innerHTML = outside;
@@ -79,7 +81,7 @@ function getMousePos(canvas, evt) {
   var scaleY = canvas.height / rect.height;
   return {
     x: (evt.clientX - rect.left) * scaleX,
-    y: (evt.clientY - rect.top) * scaleY
+    y: (evt.clientY - rect.top) * scaleY,
   };
 }
 
@@ -93,7 +95,7 @@ function drawFigure(x) {
     ctx.arc(150, 75, 50, 0, 2 * Math.PI);
     ctx.stroke();
   }
-  
+
   if (x == "kwadrat") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -102,14 +104,14 @@ function drawFigure(x) {
     r.draw(ctx);
     //ctx.strokeRect(100, 30, 80, 80);
   }
-  
+
   if (x == "prostokąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.strokeRect(100, 50, 150, 75);
   }
-  
+
   if (x == "trójkąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -124,7 +126,7 @@ function drawFigure(x) {
     ctx.lineWidth = 1;
     ctx.stroke();
   }
-  if (x == "punkt"){
+  if (x == "punkt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -137,11 +139,11 @@ function MyRect(x, y, w, h) {
   this.width = w;
   this.height = h;
 
-  this.contains = function(x, y) {
+  this.contains = function (x, y) {
     return this.x <= x && x <= this.x + this.width && this.y <= y && y <= this.y + this.height;
   };
 
-  this.draw = function(ctx) {
+  this.draw = function (ctx) {
     ctx.strokeRect(this.x, this.y, this.width, this.height);
   };
 }
