@@ -17,10 +17,12 @@ selectElement.addEventListener("change", event => {
 
 ctx.fillRect(0, 0, canvas.getAttribute("height"), canvas.getAttribute("width"));
 var r = new MyRect(100, 30, 80, 80);
+
 //drawing point on mouse click
 canvas.addEventListener(
   "click",
   function(evt) {
+	//sprawdzanie czy punkt znajduje się wewnątrz prostokąta
     var mousePos = getMousePos(canvas, evt);
     // alert("pozycja myszki X " + mousePos.x + ", Pozycja myszki Y" + mousePos.y);
     document.getElementById("X").innerHTML = mousePos.x;
@@ -62,8 +64,10 @@ function drawFigure(x) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.arc(150, 75, 50, 0, 2 * Math.PI);
-    ctx.stroke();
+    ctx.stro
+	ke();
   }
+  
   if (x == "kwadrat") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -72,13 +76,14 @@ function drawFigure(x) {
     r.draw(ctx);
     //ctx.strokeRect(100, 30, 80, 80);
   }
+  
   if (x == "prostokąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.strokeRect(100, 50, 150, 75);
   }
+  
   if (x == "trujkąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -91,10 +96,10 @@ function drawFigure(x) {
 
     // the outline
     ctx.lineWidth = 1;
-
     ctx.stroke();
   }
 }
+
 function MyRect(x, y, w, h) {
   this.x = x;
   this.y = y;
