@@ -13,18 +13,17 @@ selectElement.addEventListener("change", event => {
   result.textContent = `${event.target.value}`;
   //console.log(result.textContent);
   drawFigure(result.textContent);
-  draw(result.textContent);
 });
 
 ctx.fillRect(0, 0, canvas.getAttribute("height"), canvas.getAttribute("width"));
 var r = new MyRect(100, 30, 80, 80);
 
+const checkFigure = document.querySelector(".result");
 //drawing point on mouse click
-function draw(x){
 canvas.addEventListener(
+  //console.log(result.textContent);
   "click",
   function(evt) {
-	//sprawdzanie czy punkt znajduje się wewnątrz prostokąta
     var mousePos = getMousePos(canvas, evt);
     // alert("pozycja myszki X " + mousePos.x + ", Pozycja myszki Y" + mousePos.y);
     document.getElementById("X").innerHTML = mousePos.x;
@@ -33,21 +32,42 @@ canvas.addEventListener(
     ctx.beginPath();
     ctx.arc(mousePos.x, mousePos.y, 2, 0, Math.PI * 2, true);
     ctx.fill();
-    if(x == "kwadrat"){
-      
-    if (r.contains(mousePos.x, mousePos.y)) {
-      //alert("punkt");
-      document.getElementById("result").innerHTML = inside;
-    } else {
-      document.getElementById("result").innerHTML = outside;
+
+    if(checkFigure.textContent == "kwadrat"){
+      if (r.contains(mousePos.x, mousePos.y)) {
+        //alert("punkt");
+        document.getElementById("result").innerHTML = inside;
+      } else {
+        document.getElementById("result").innerHTML = outside;
+      }
     }
-    
-  }
+    if(checkFigure.textContent == "prostokąt"){
+      r = new MyRect(100, 50, 150, 75);
+      if (r.contains(mousePos.x, mousePos.y)) {
+        //alert("punkt");
+        document.getElementById("result").innerHTML = inside;
+      } else {
+        document.getElementById("result").innerHTML = outside;
+      }
+    }
+    if(checkFigure.textContent == "trójkąt"){
+      console.log("trójkąt");
+    }
+    if(checkFigure.textContent == "koło"){
+      console.log(mousePos.x)
+      console.log(mousePos.y)
+      var check = (mousePos.x - 150)^2 + (mousePos.y - 75)^2;
+      console.log(check)
+      if(check <= 50 && check >= -50){
+        //alert("punkt");
+        document.getElementById("result").innerHTML = inside;
+      } else {
+        document.getElementById("result").innerHTML = outside;
+      }
+    }
   },
   false
 );
-
-}
 
 var inside = '<div class="alert alert-primary" role="alert">Punkt jest wewnątrz</div>;';
 var outside = '<div class="alert alert-danger" role="alert">Punkt jest na zewnątrz</div >';
@@ -71,8 +91,7 @@ function drawFigure(x) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.arc(150, 75, 50, 0, 2 * Math.PI);
-    ctx.stro
-	ke();
+    ctx.stroke();
   }
   
   if (x == "kwadrat") {
@@ -91,7 +110,7 @@ function drawFigure(x) {
     ctx.strokeRect(100, 50, 150, 75);
   }
   
-  if (x == "trujkąt") {
+  if (x == "trójkąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -104,6 +123,11 @@ function drawFigure(x) {
     // the outline
     ctx.lineWidth = 1;
     ctx.stroke();
+  }
+  if (x == "punkt"){
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
 
