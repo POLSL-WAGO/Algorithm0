@@ -13,12 +13,14 @@ selectElement.addEventListener("change", event => {
   result.textContent = `${event.target.value}`;
   //console.log(result.textContent);
   drawFigure(result.textContent);
+  draw(result.textContent);
 });
 
 ctx.fillRect(0, 0, canvas.getAttribute("height"), canvas.getAttribute("width"));
 var r = new MyRect(100, 30, 80, 80);
 
 //drawing point on mouse click
+function draw(x){
 canvas.addEventListener(
   "click",
   function(evt) {
@@ -31,16 +33,21 @@ canvas.addEventListener(
     ctx.beginPath();
     ctx.arc(mousePos.x, mousePos.y, 2, 0, Math.PI * 2, true);
     ctx.fill();
-
+    if(x == "kwadrat"){
+      
     if (r.contains(mousePos.x, mousePos.y)) {
       //alert("punkt");
       document.getElementById("result").innerHTML = inside;
     } else {
       document.getElementById("result").innerHTML = outside;
     }
+    
+  }
   },
   false
 );
+
+}
 
 var inside = '<div class="alert alert-primary" role="alert">Punkt jest wewnątrz</div>;';
 var outside = '<div class="alert alert-danger" role="alert">Punkt jest na zewnątrz</div >';
