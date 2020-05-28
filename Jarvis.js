@@ -1,3 +1,9 @@
+/*
+	Kuśmierz Wojciech
+	Rojek Marcin
+	Wiśniewski Mateusz
+*/
+
 function main() {
   var viewSizeInPixels = new Coords(300, 300);
 
