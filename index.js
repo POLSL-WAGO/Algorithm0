@@ -42,12 +42,9 @@ function isInsideTriangle(x1, y1, x2, y2, x3, y3, x, y) {
 
   /* Check if sum of A1, A2 and A3 is same as A */
   if (A == A1 + A2 + A3) {
-    alert("inside");
-    return console.log("inside");
-  }
-  if (A != A1 + A2 + A3) {
-    alert("outside");
-    return console.log("outside");
+    return console.log("inside", A, A1, A2, A3);
+  }else{
+    return console.log("outside", A, A1, A2, A3);
   }
 }
 
@@ -64,7 +61,40 @@ canvas.addEventListener(
     ctx.arc(mousePos.x, mousePos.y, 2, 0, Math.PI * 2, true);
     ctx.fill();
 
-    if (checkFigure.textContent == "kwadrat") {
+    switch(checkFigure.textContent){
+      case 'kwadrat':
+        var x = new MyRect(100, 30, 80, 80);
+        if (x.contains(mousePos.x, mousePos.y)) {
+          //alert("punkt");
+          document.getElementById("result").innerHTML = inside;
+        } else {
+          document.getElementById("result").innerHTML = outside;
+        }
+        break;
+      case 'prostokąt':
+        var x = new MyRect(100, 50, 150, 75);
+        if (x.contains(mousePos.x, mousePos.y)) {
+          //alert("punkt");
+          document.getElementById("result").innerHTML = inside;
+        } else {
+          document.getElementById("result").innerHTML = outside;
+        }
+        break;
+      case 'koło':
+        var check = (mousePos.x - 150) * (mousePos.x - 150) + (mousePos.y - 75) * (mousePos.y - 75);
+        console.log("check pozycja" + check);
+        const r = 50 * 50;
+        if (check < r) {
+          document.getElementById("result").innerHTML = inside;
+        } else {
+          document.getElementById("result").innerHTML = outside;
+        }
+        break;
+      case 'trójkąt':
+        isInsideTriangle(150, 20, 50, 100, 250, 100, mousePos.x, mousePos.y);
+        break;
+    }
+    /*if (checkFigure.textContent == "kwadrat") {
       if (r.contains(mousePos.x, mousePos.y)) {
         //alert("punkt");
         document.getElementById("result").innerHTML = inside;
@@ -100,7 +130,7 @@ canvas.addEventListener(
       } else {
         document.getElementById("result").innerHTML = outside;
       }
-    }
+    }*/
   },
   false
 );
