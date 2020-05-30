@@ -20,6 +20,37 @@ var r = new MyRect(100, 30, 80, 80);
 
 const checkFigure = document.querySelector(".result");
 //drawing point on mouse click
+
+function area(x1, y1, x2, y2, x3, y3) {
+  //funkcja potrzebna dod sprawdzenia czy punkt jest w trójkącie
+  return (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0;
+}
+
+function isInsideTriangle(x1, y1, x2, y2, x3, y3, x, y) {
+  //funkcjea potrzebna do sprawdzenia czy pkt jest w trójkącie
+  /* Calculate area of triangle ABC */
+  const A = area(x1, y1, x2, y2, x3, y3);
+
+  /* Calculate area of triangle PBC */
+  const A1 = area(x, y, x2, y2, x3, y3);
+
+  /* Calculate area of triangle PAC */
+  const A2 = area(x1, y1, x, y, x3, y3);
+
+  /* Calculate area of triangle PAB */
+  const A3 = area(x1, y1, x2, y2, x, y);
+
+  /* Check if sum of A1, A2 and A3 is same as A */
+  if (A == A1 + A2 + A3) {
+    alert("inside");
+    return console.log("inside");
+  }
+  if (A != A1 + A2 + A3) {
+    alert("outside");
+    return console.log("outside");
+  }
+}
+
 canvas.addEventListener(
   //console.log(result.textContent);
   "click",
@@ -51,8 +82,11 @@ canvas.addEventListener(
       }
     }
     if (checkFigure.textContent == "trójkąt") {
-      // todo dać sprawdzanie dla trójkąta
-      console.log("trójkąt");
+      // ctx.moveTo(150, 20);
+      // ctx.lineTo(50, 100);
+      // ctx.lineTo(250, 100);
+
+      isInsideTriangle(150, 20, 50, 100, 250, 100, mousePos.x, mousePos.y);
     }
     if (checkFigure.textContent == "koło") {
       console.log(mousePos.x);
