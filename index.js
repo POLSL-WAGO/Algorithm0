@@ -151,7 +151,53 @@ function getMousePos(canvas, evt) {
 
 // figure options
 function drawFigure(x) {
-  if (x == "koło") {
+  switch(x){
+    case 'prostokąt': 
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeRect(100, 50, 150, 75);
+      break;
+
+    case 'trójkąt':
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.moveTo(150, 20);
+      ctx.lineTo(50, 100);
+      ctx.lineTo(250, 100);
+      ctx.closePath();
+
+      // the outline
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      break;
+
+    case "koło":
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(150, 75, 50, 0, 2 * Math.PI);
+      ctx.stroke();
+      break;
+
+    case 'kwadrat':
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      r.draw(ctx);
+      //ctx.strokeRect(100, 30, 80, 80);
+      break;
+      
+    case 'punkt':
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      break;
+  }
+  /*if (x == "koło") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -168,7 +214,7 @@ function drawFigure(x) {
     r.draw(ctx);
     //ctx.strokeRect(100, 30, 80, 80);
   }
-
+  
   if (x == "prostokąt") {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
@@ -190,11 +236,7 @@ function drawFigure(x) {
     ctx.lineWidth = 1;
     ctx.stroke();
   }
-  if (x == "punkt") {
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
+  */
 }
 
 function MyRect(x, y, w, h) {
